@@ -1,6 +1,6 @@
 import java.util.Iterator;
 import java.util.ArrayList;
-// import java.util.LinkedList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -95,7 +95,7 @@ class PersonList{
     }
 
     public boolean deletePerson(int idNumber){
-        Iterator<Person> thatId = Iterator();
+        Iterator<Person> thatId = people.iterator();
         while(thatId.hasNext()){
             Person thatPersonId = thatId.next();
             if(thatPersonId.getId() == idNumber){
@@ -117,7 +117,79 @@ class PersonList{
 
 public class PersonDetailList {
     public static void main(String[] args){
-        
+       Scanner inputDetails = new Scanner(System.in);
+       
+       PersonList myPersonDetailObj = new PersonList();
+
+
+       while(true){
+            System.out.println("1. Add Person ");
+            System.out.println("2. Search Person by ID ");
+            System.out.println("3. Delete Person by ID");
+            System.out.println("4. Update Surname ");
+            System.out.println("5. Exit program ");
+            System.out.println("Select option ");
+
+            int switchControl = inputDetails.nextInt();
+
+            switch (switchControl) {
+                case 1:
+                    System.out.println("Enter Personal details");
+                    System.out.println("Name: ");
+                    String firstname = inputDetails.nextLine();
+                    String firstName = inputDetails.nextLine();
+                    System.out.println("Surname: ");           
+                    String lastName = inputDetails.nextLine();
+                    System.out.println("Age: ");           
+                    int age = inputDetails.nextInt();
+                    System.out.println("ID: ");
+                    int id = inputDetails.nextInt();
+                    System.out.println("Contact: ");
+                    String contacterror = inputDetails.nextLine();
+                    String contact = inputDetails.nextLine();
+                    System.out.println("Marital Status");
+                    
+                    String marital =inputDetails.nextLine();
+                    myPersonDetailObj.create(firstName, lastName, age, id, contact, marital);                  
+                    System.out.println("Information Captured!!!");
+                    break;
+                case 2:
+                    System.out.println("Enter the existing ID to search");
+                    int idNumber = inputDetails.nextInt();
+                    while(true){
+                        myPersonDetailObj.display(idNumber);
+                    }
+                
+                case 3:
+                    System.out.println("Enter the existing ID to delete an individual info");
+                    int deleteRecord = inputDetails.nextInt();
+                    myPersonDetailObj.deletePerson(deleteRecord);
+                    System.out.println("Task Successful");
+                    break;
+                case 4:
+                    System.out.println("Enter the ID to update Surname");
+                    int updateID = inputDetails.nextInt();
+                    System.out.println("Update surname");
+                    String updateSurnameerror = inputDetails.nextLine();
+                    String updateSurname = inputDetails.nextLine();
+                    myPersonDetailObj.updateSurname(updateID, updateSurname);
+                    if(myPersonDetailObj.updateSurname(updateID, updateSurname) != null){
+                        myPersonDetailObj.display(updateID);
+                        System.out.println("Task complete!!! surname updated");
+                    }
+                    else{
+                        System.out.println("Task failed");
+                    }
+                    break;
+                case 5:
+                    System.out.println("Goodbye!");
+                    inputDetails.close();
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid !!!Please enter a valid option.");
+            }
+       }
                
     }
 }

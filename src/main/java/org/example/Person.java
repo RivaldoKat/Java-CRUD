@@ -24,14 +24,13 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", id='" + id + '\'' +
-                ", contact='" + contact + '\'' +
-                ", marriageStatus='" + marriageStatus + '\'' +
-                '}';
+        return "Person:" +
+                " FirstName ='" + firstName + '\'' +
+                ", LastName ='" + lastName + '\'' +
+                ", Age =" + age +
+                ", ID ='" + id + '\'' +
+                ", Contact ='" + contact + '\'' +
+                ", MarriageStatus ='" + marriageStatus + '\'';
     }
 }
 

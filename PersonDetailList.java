@@ -136,8 +136,8 @@ public class PersonDetailList {
                 case 1:
                     System.out.println("Enter Personal details");
                     System.out.println("Name: ");
-                    String firstname = inputDetails.nextLine();
-                    String firstName = inputDetails.nextLine();
+                    
+                    String firstName = inputDetails.next();
                     System.out.println("Surname: ");           
                     String lastName = inputDetails.nextLine();
                     System.out.println("Age: ");           
@@ -145,7 +145,7 @@ public class PersonDetailList {
                     System.out.println("ID: ");
                     int id = inputDetails.nextInt();
                     System.out.println("Contact: ");
-                    String contacterror = inputDetails.nextLine();
+                   
                     String contact = inputDetails.nextLine();
                     System.out.println("Marital Status");
                     

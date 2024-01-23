@@ -15,7 +15,19 @@ public class PersonRepositoryImplementation implements PersonRepository {
 
     @Override
     public void savePerson(Person person) {
-        people.add(person);
+        if(people.isEmpty()){
+            people.add(person);
+        }
+        else if(people.contains(person)){
+            for(Person existingPerson: people){
+                if(existingPerson.getId().equals(person.getId())){
+                    continue;
+                }  
+            }
+        }
+        else{
+            people.add(person);
+        }
     }
 
     @Override

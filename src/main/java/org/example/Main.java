@@ -42,10 +42,9 @@ public class Main {
                 commands(personService);
                 break;
             case 2:
-                Person person = personService.savePerson();
+                 personService.savePerson();
                 
-                System.out.println("Person " + person.getFirstName() +" With id " +
-                        person.getId() +" is saved");
+                
                 commands(personService);
                 break;
             case 3:

@@ -23,12 +23,13 @@ public class Main {
 
     public static void commands(PersonService personService){
 
-        System.out.println("Enter option " +
-                "\n 1) List of People" +
-                "\n 2) Create a person" +
-                "\n 3) Get Person" +
-                "\n 4) Update person" +
-                "\n 5) Delete person");
+        System.out.println("""
+                Enter option\s
+                 1) List of People
+                 2) Create a person
+                 3) Get Person
+                 4) Update person
+                 5) Delete person""");
         int opt = scanner.nextInt();
 
         switch (opt){

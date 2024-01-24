@@ -3,6 +3,7 @@ package org.example;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 @AllArgsConstructor
@@ -11,6 +12,7 @@ public class PersonService {
     // This will be our variables for Dependency Injection
     private PersonRepository personRepository;
     private Scanner scanner;
+
 
     // This is where we do the business logic
 
@@ -30,13 +32,26 @@ public class PersonService {
         System.out.println("Enter Contact details :");
         person.setContact(scanner.next());
         System.out.println("Enter Person Identity number :");
-        person.setId(scanner.next());
+        String id = scanner.next();
+        person.setId(id);
         System.out.println("Enter Person Marital Status :");
         person.setMarriageStatus(scanner.next());
+        boolean found =false;
+        for(Person person1:getAllPeople()){
+            if(Objects.equals(person1.getId(),id)){
+                found = true;
+                break;
+            }
+        }
 
-        personRepository.savePerson(person);
-
+        if(!found){
+            personRepository.savePerson(person);
+        }else {
+            System.out.println("The user already exists in the database");
+        }
         return person;
+
+
     }
 
     public Person getPerson(){

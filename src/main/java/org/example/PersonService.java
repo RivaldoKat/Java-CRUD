@@ -3,7 +3,6 @@ package org.example;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 @AllArgsConstructor
@@ -38,7 +37,7 @@ public class PersonService {
         person.setMarriageStatus(scanner.next());
         boolean found =false;
         for(Person person1:getAllPeople()){
-            if(Objects.equals(person1.getId(),id)){
+            if(person1.getId() == id){
                 found = true;
                 break;
             }
@@ -46,6 +45,8 @@ public class PersonService {
 
         if(!found){
             personRepository.savePerson(person);
+            System.out.println("Person " + person.getFirstName() +" With id " +
+                        person.getId() +" is saved");
         }else {
             System.out.println("The user already exists in the database");
         }

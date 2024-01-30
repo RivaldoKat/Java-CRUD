@@ -1,7 +1,7 @@
 package org.example;
 
 import lombok.AllArgsConstructor;
-
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,7 +27,19 @@ public class PersonService {
         System.out.println("Enter Last name :");
         person.setLastName(scanner.next());
         System.out.println("Enter Age :");
-        person.setAge(scanner.nextInt());
+        boolean loopHolder = true;
+        do{
+            loopHolder = false;
+            try{
+            person.setAge(scanner.nextInt());
+        }
+        catch(InputMismatchException e){
+            System.out.println("Enter the right value:");
+            loopHolder = true;
+            scanner.next();        
+        }
+
+        }while(loopHolder); 
         System.out.println("Enter Contact details :");
         person.setContact(scanner.next());
         System.out.println("Enter Person Identity number :");
@@ -35,6 +47,7 @@ public class PersonService {
         person.setId(id);
         System.out.println("Enter Person Marital Status :");
         person.setMarriageStatus(scanner.next());
+        
         boolean found =false;
         for(Person person1:getAllPeople()){
             if(person1.getId() == id){

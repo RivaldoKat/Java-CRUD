@@ -1,5 +1,6 @@
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -143,7 +144,12 @@ public class PersonDetailList {
                     System.out.println("Age: ");           
                     int age = inputDetails.nextInt();
                     System.out.println("ID: ");
-                    int id = inputDetails.nextInt();
+                    try{
+                        int id = inputDetails.nextInt();
+                    }
+                    catch(InputMismatchException e){
+                        e.printStackTrace();
+                    }
                     System.out.println("Contact: ");
                    
                     String contact = inputDetails.nextLine();

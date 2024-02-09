@@ -1,9 +1,8 @@
 package org.example;
 
 import lombok.AllArgsConstructor;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 
 @AllArgsConstructor
 public class PersonService {
@@ -12,22 +11,26 @@ public class PersonService {
     private PersonRepository personRepository;
     private Scanner scanner;
 
-
     // This is where we do the business logic
 
-    public List<Person> getAllPeople(){
-        return personRepository.getAllPeople();
+
+    public HashMap<String, Person> getPeople(){
+        return personRepository.getPeople();
     }
 
-    public Person savePerson(){
+
+
+    public void savePerson(){
         Person person = new Person();
 
         System.out.println("Enter First name :");
-        person.setFirstName(scanner.next());
+        String firstName = scanner.next();
+        person.setFirstName(firstName);
         System.out.println("Enter Last name :");
-        person.setLastName(scanner.next());
+        String lastName = scanner.next();
+        person.setLastName(lastName);
         System.out.println("Enter Age :");
-        boolean loopHolder = true;
+        boolean loopHolder;
         do{
             loopHolder = false;
             try{
@@ -36,10 +39,10 @@ public class PersonService {
         catch(InputMismatchException e){
             System.out.println("Enter the right value:");
             loopHolder = true;
-            scanner.next();        
+            scanner.next();
         }
 
-        }while(loopHolder); 
+        }while(loopHolder);
         System.out.println("Enter Contact details :");
         person.setContact(scanner.next());
         System.out.println("Enter Person Identity number :");
@@ -47,68 +50,54 @@ public class PersonService {
         person.setId(id);
         System.out.println("Enter Person Marital Status :");
         person.setMarriageStatus(scanner.next());
-        
-        boolean found =false;
-        for(Person person1:getAllPeople()){
-            if(person1.getId() == id){
-                found = true;
-                break;
-            }
-        }
 
-        if(!found){
+        if(getPeople().get(id) == null){
             personRepository.savePerson(person);
-            System.out.println("Person " + person.getFirstName() +" With id " +
+            System.out.println("Person " + person.getFirstName() +" With ID " +
                         person.getId() +" is saved");
         }else {
             System.out.println("The user already exists in the database");
         }
-        return person;
 
 
     }
 
     public Person getPerson(){
         //We get a person by their id number
+
         System.out.println("Enter the Id number of a person");
         String person_id = scanner.next();
 
-        Person person = new Person();
+        Person person;
 
-        //get all people
-        for(Person person_inList:getAllPeople()){
+            if (getPeople().get(person_id) != null){
+                 person = personRepository.getPerson(person_id);
 
-            if (personRepository.getPerson(person_id,person_inList) != null){
-                 person = personRepository.getPerson(person_id,person_inList);
-                 break;
             }else {
                 person = null;
             }
-        }
+
+
 
         return person;
     }
 
-    public Person updatePerson(){
-        Person person = new Person();
-
-        person = getPerson();
+    public void updatePerson(){
+        Person person = getPerson();
 
         System.out.println("Enter surname");
         String lastName = scanner.next();
-        if(personRepository.updatePerson(person,lastName)){
+        if(getPeople().containsKey(person.getId())){
+            personRepository.updatePerson(person,lastName);
             System.out.println("Person Updated");
         }else {
             System.out.println("Person Not Found");
-        };
+        }
 
-        return person;
     }
 
     public void deletePerson(){
-        Person person = new Person();
-
-        person = getPerson();
+        Person person = getPerson();
 
        if(personRepository.deletePerson(person)){
            System.out.println("Person Deleted");

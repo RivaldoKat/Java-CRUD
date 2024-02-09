@@ -1,16 +1,18 @@
 package org.example;
 
-import java.util.List;
+
+import java.util.HashMap;
 
 public interface PersonRepository {
-    List<Person> getAllPeople();
+//    List<Person> getAllPeople();
+    HashMap<String, Person> getPeople();
     void savePerson(Person person);
 
-    boolean updatePerson(Person person,String lastName);
+    void updatePerson(Person person, String lastName);
 
     boolean deletePerson(Person person);
 
-    Person getPerson(String id,Person person);
+    Person getPerson(String id);
 }
 
 

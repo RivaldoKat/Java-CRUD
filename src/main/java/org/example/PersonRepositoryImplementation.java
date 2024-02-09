@@ -1,39 +1,36 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class PersonRepositoryImplementation implements PersonRepository {
 
-    private List<Person> people = new ArrayList<>();
+    private final HashMap<String, Person> allPeople = new HashMap<>();
 
     @Override
-    public List<Person> getAllPeople() {
-
-        return people;
+    public HashMap<String, Person> getPeople(){
+        return allPeople;
     }
 
     @Override
     public void savePerson(Person person) {
-            people.add(person);
+            allPeople.put(person.getId(),person);
     }
 
     @Override
-    public boolean updatePerson( Person person, String lastName) {
+    public void updatePerson(Person person, String lastName) {
         person.setLastName(lastName);
-        return true;
     }
 
     @Override
     public boolean deletePerson(Person person) {
-            people.remove(person);
+            allPeople.remove(person.getId());
             return true;
     }
 
     @Override
-    public Person getPerson(String id,Person person) {
-        if (person.getId().equals(id)){
-            return person;
+    public Person getPerson(String id) {
+        if (getPeople().get(id) != null){
+            return getPeople().get(id);
         }
         return null;
     }

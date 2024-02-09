@@ -1,7 +1,7 @@
 package org.example;
 
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -10,7 +10,7 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        PersonRepositoryImplementation personRepositoryImplementation = new PersonRepositoryImplementation();
+        PersonRepository personRepositoryImplementation = new PersonRepositoryImplementation();
 
         //Now we implement dependency injection
 
@@ -21,7 +21,7 @@ public class Main {
     }
 
 
-    public static void commands(PersonService personService){
+    public static void commands(PersonService personService) {
 
         System.out.println("""
                 Enter option\s
@@ -35,10 +35,12 @@ public class Main {
         switch (opt){
             case 1:
                 // Get all people
-                List<Person> people = personService.getAllPeople();
-                for (Person person: people){
-                    System.out.println(person);
-                }
+//                List<Person> people = personService.getAllPeople();
+                HashMap<String, Person> people = personService.getPeople();
+
+                    System.out.println(people);
+
+                
                 commands(personService);
                 break;
             case 2:

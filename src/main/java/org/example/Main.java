@@ -2,6 +2,7 @@ package org.example;
 
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -35,12 +36,12 @@ public class Main {
         switch (opt){
             case 1:
                 // Get all people
-//                List<Person> people = personService.getAllPeople();
                 HashMap<String, Person> people = personService.getPeople();
 
-                    System.out.println(people);
+                    for(Map.Entry<String, Person> order: people.entrySet()){
+                        System.out.println(order.getValue());
+                    }
 
-                
                 commands(personService);
                 break;
             case 2:

@@ -1,11 +1,11 @@
 package org.example;
 
 
-import java.util.HashMap;
+import java.util.List;
 
 public interface PersonRepository {
 //    List<Person> getAllPeople();
-    HashMap<String, Person> getPeople();
+    List<Person> getPeople();
     void savePerson(Person person);
 
     void updatePerson(Person person, String lastName);

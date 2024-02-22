@@ -14,7 +14,7 @@ public class PersonService {
     // This is where we do the business logic
 
 
-    public HashMap<String, Person> getPeople(){
+    public List<Person> getPeople(){
         return personRepository.getPeople();
     }
 
@@ -51,33 +51,24 @@ public class PersonService {
         System.out.println("Enter Person Marital Status :");
         person.setMarriageStatus(scanner.next());
 
-        if(getPeople().get(id) == null){
-            personRepository.savePerson(person);
-            System.out.println("Person " + person.getFirstName() +" With ID " +
-                        person.getId() +" is saved");
-        }else {
-            System.out.println("The user already exists in the database");
-        }
+       Optional<Person> getID = getPeople().stream().filter(
+               personID -> personID.equals(personRepository.getPerson(id))
+       ).findFirst();
+       getID.ifPresentOrElse(
+               r -> System.out.println(r.getFirstName() + " " + r.getLastName() + " exist ID: " + r.getId()),
+               () -> personRepository.savePerson(person)
+       );
+
 
 
     }
 
     public Person getPerson(){
         //We get a person by their id number
-
+        Person person;
         System.out.println("Enter the Id number of a person");
         String person_id = scanner.next();
-
-        Person person;
-
-            if (getPeople().get(person_id) != null){
-                 person = personRepository.getPerson(person_id);
-
-            }else {
-                person = null;
-            }
-
-
+        person = personRepository.getPerson(person_id);
 
         return person;
     }
@@ -87,13 +78,13 @@ public class PersonService {
 
         System.out.println("Enter surname");
         String lastName = scanner.next();
-        if(getPeople().containsKey(person.getId())){
-            personRepository.updatePerson(person,lastName);
-            System.out.println("Person Updated");
-        }else {
-            System.out.println("Person Not Found");
-        }
-
+        Optional<Person> getID = getPeople().stream().filter(
+                personID -> personID.equals(person)
+        ).findFirst();
+        getID.ifPresent(
+                r -> personRepository.updatePerson(person,lastName)
+        );
+        System.out.println(person);
     }
 
     public void deletePerson(){

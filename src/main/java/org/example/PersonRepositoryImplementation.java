@@ -1,19 +1,22 @@
 package org.example;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class PersonRepositoryImplementation implements PersonRepository {
 
-    private final HashMap<String, Person> allPeople = new HashMap<>();
+    private final List<Person> allPeople = new ArrayList<>();
 
     @Override
-    public HashMap<String, Person> getPeople(){
+    public List<Person> getPeople(){
         return allPeople;
     }
 
     @Override
     public void savePerson(Person person) {
-            allPeople.put(person.getId(),person);
+            allPeople.add(person);
     }
 
     @Override
@@ -23,15 +26,16 @@ public class PersonRepositoryImplementation implements PersonRepository {
 
     @Override
     public boolean deletePerson(Person person) {
-            allPeople.remove(person.getId());
+            allPeople.remove(person);
             return true;
     }
 
     @Override
     public Person getPerson(String id) {
-        if (getPeople().get(id) != null){
-            return getPeople().get(id);
-        }
-        return null;
+        AtomicReference<Person> person = new AtomicReference<>(new Person());
+        Optional<Person> getID = getPeople().stream()
+                .filter(personID -> personID.getId().equals(id)).findFirst();
+        getID.ifPresent(person::set);
+        return person.get();
     }
 }

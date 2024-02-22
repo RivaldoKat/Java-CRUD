@@ -1,8 +1,8 @@
 package org.example;
 
 
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -36,11 +36,11 @@ public class Main {
         switch (opt){
             case 1:
                 // Get all people
-                HashMap<String, Person> people = personService.getPeople();
+                List<Person> people = personService.getPeople();
+                people.stream().forEach(
+                        System.out::println
+                );
 
-                    for(Map.Entry<String, Person> order: people.entrySet()){
-                        System.out.println(order.getValue());
-                    }
 
                 commands(personService);
                 break;

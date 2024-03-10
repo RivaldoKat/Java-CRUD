@@ -18,8 +18,58 @@ public class PersonService {
         return personRepository.getPeople();
     }
 
+    public void commands(PersonService personService) {
+
+        System.out.println("""
+                Enter option\s
+                 1) List of People
+                 2) Create a person
+                 3) Get Person
+                 4) Update person
+                 5) Delete person
+                 6) Exit""");
+
+        int opt = scanner.nextInt();
+        switch (opt){
+            case 1:
+                // Get all people
+                List<Person> people = personService.getPeople();
+                people.stream().forEach(
+                        System.out::println
+                );
 
 
+                commands(personService);
+                break;
+            case 2:
+                personService.savePerson();
+
+
+                commands(personService);
+                break;
+            case 3:
+
+                System.out.println(personService.getPerson());
+                commands(personService);
+                break;
+            case 4:
+                //update
+
+                personService.updatePerson();
+                commands(personService);
+                break;
+            case 5:
+                //delete
+                personService.deletePerson();
+                commands(personService);
+                break;
+            case 6:
+                System.out.println("Goodbye!!!");
+                System.exit(0);
+            default:
+                commands(personService);
+        }
+    }
     public void savePerson(){
         Person person = new Person();
 

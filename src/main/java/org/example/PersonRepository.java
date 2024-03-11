@@ -9,6 +9,7 @@ public interface PersonRepository {
     void savePerson(Person person);
 
     void updatePerson(Person person, String lastName);
+    boolean setMarriage(int type);
 
     boolean deletePerson(Person person);
 

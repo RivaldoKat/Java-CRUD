@@ -20,17 +20,17 @@ public class Person{
     private int age;
     private String id;
     private String contact;
-    private String marriageStatus;
+    private boolean marriageStatus;
 
     @Override
     public String toString() {
         return "Person:" +
-                " FirstName ='" + firstName + '\'' +
-                ", LastName ='" + lastName + '\'' +
-                ", Age =" + age +
-                ", ID ='" + id + '\'' +
-                ", Contact ='" + contact + '\'' +
-                ", MarriageStatus ='" + marriageStatus + '\'';
+                " FirstName = '" + firstName + '\'' +
+                ", LastName = '" + lastName + '\'' +
+                ", Age = " + age +
+                ", ID = '" + id + '\'' +
+                ", Contact = '" + contact + '\'' +
+                ", MarriageStatus = '" + (marriageStatus ? "Married" : "Single") + '\'';
     }
 }
 

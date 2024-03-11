@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class PersonRepositoryImplementation implements PersonRepository {
 
     private final List<Person> allPeople = new ArrayList<>();
+    private boolean maritalStatus = false;
 
     @Override
     public List<Person> getPeople(){
@@ -17,6 +18,14 @@ public class PersonRepositoryImplementation implements PersonRepository {
     @Override
     public void savePerson(Person person) {
             allPeople.add(person);
+    }
+    @Override
+    public boolean setMarriage(int type){
+        Person getStatus = new Person();
+        if(type == 1){
+           return getStatus.isMarriageStatus();
+        }
+        return true;
     }
 
     @Override

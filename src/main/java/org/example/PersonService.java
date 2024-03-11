@@ -34,7 +34,7 @@ public class PersonService {
             case 1:
                 // Get all people
                 List<Person> people = personService.getPeople();
-                people.stream().forEach(
+                people.forEach(
                         System.out::println
                 );
 
@@ -72,6 +72,7 @@ public class PersonService {
     }
     public void savePerson(){
         Person person = new Person();
+        PersonRepositoryImplementation getStatus = new PersonRepositoryImplementation();
 
         System.out.println("Enter First name :");
         String firstName = scanner.next();
@@ -98,8 +99,9 @@ public class PersonService {
         System.out.println("Enter Person Identity number :");
         String id = scanner.next();
         person.setId(id);
-        System.out.println("Enter Person Marital Status :");
-        person.setMarriageStatus(scanner.next());
+        System.out.print("Press 1.Single or 2.Married :");
+        int status = scanner.nextInt();
+        person.setMarriageStatus(getStatus.setMarriage(status));
 
        Optional<Person> getID = getPeople().stream().filter(
                personID -> personID.equals(personRepository.getPerson(id))
@@ -108,8 +110,6 @@ public class PersonService {
                r -> System.out.println(r.getFirstName() + " " + r.getLastName() + " exist ID: " + r.getId()),
                () -> personRepository.savePerson(person)
        );
-
-
 
     }
 

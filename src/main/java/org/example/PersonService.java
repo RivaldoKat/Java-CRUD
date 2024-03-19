@@ -2,6 +2,7 @@ package org.example;
 
 import lombok.AllArgsConstructor;
 
+import java.io.*;
 import java.util.*;
 
 @AllArgsConstructor
@@ -11,6 +12,7 @@ public class PersonService {
     private PersonRepository personRepository;
     private Scanner scanner;
 
+
     // This is where we do the business logic
 
 
@@ -18,8 +20,8 @@ public class PersonService {
         return personRepository.getPeople();
     }
 
-    public void commands(PersonService personService) {
-
+    public void commands(PersonService personService) throws IOException {
+        PersonFileHandler personFileHandler = new PersonFileHandler();
         System.out.println("""
                 Enter option\s
                  1) List of People
@@ -37,11 +39,12 @@ public class PersonService {
                 people.forEach(
                         System.out::println
                 );
-
+                personFileHandler.deserialize("database.txt");
 
                 commands(personService);
                 break;
             case 2:
+
                 personService.savePerson();
 
 
@@ -72,6 +75,7 @@ public class PersonService {
     }
     public void savePerson(){
         Person person = new Person();
+        PersonFileHandler personFileHandler = new PersonFileHandler();
         PersonRepositoryImplementation getStatus = new PersonRepositoryImplementation();
 
         System.out.println("Enter First name :");
@@ -110,7 +114,7 @@ public class PersonService {
                r -> System.out.println(r.getFirstName() + " " + r.getLastName() + " exist ID: " + r.getId()),
                () -> personRepository.savePerson(person)
        );
-
+        personFileHandler.serialize(person, "database.txt");
     }
 
     public Person getPerson(){

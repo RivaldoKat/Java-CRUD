@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * Here we are using <Encapsulation> for information hiding
  * That is the reason we use all of our attributes are of access modifier of private
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Person{
+public class Person implements Serializable {
     private String firstName;
     private String lastName;
     private int age;

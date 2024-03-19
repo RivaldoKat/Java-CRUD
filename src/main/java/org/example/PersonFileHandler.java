@@ -10,7 +10,7 @@ public class PersonFileHandler {
             objectOut.writeObject(obj);
             System.out.println("Info Saved");
         } catch (IOException e) {
-            System.out.println("Error occurred during serialization.");
+            System.out.println("Error occurred during serialization");
             e.printStackTrace();
         }
     }
